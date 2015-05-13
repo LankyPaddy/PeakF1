@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PeakF1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="PeakF1StoreContainer">
+    <EntitySet Name="Prediction" EntityType="PeakF1.Store.Prediction" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PredictionDetail" EntityType="PeakF1.Store.PredictionDetail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="PeakF1.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Race" EntityType="PeakF1.Store.Race" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Driver" EntityType="PeakF1.Store.Driver" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RaceResult" EntityType="PeakF1.Store.RaceResult" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Season" EntityType="PeakF1.Store.Season" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Team" EntityType="PeakF1.Store.Team" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SeasonTeam" EntityType="PeakF1.Store.SeasonTeam" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PredictionPredictionDetail" Association="PeakF1.Store.PredictionPredictionDetail">
+      <End Role="Prediction" EntitySet="Prediction" />
+      <End Role="PredictionDetail" EntitySet="PredictionDetail" />
+    </AssociationSet>
+    <AssociationSet Name="UserPrediction" Association="PeakF1.Store.UserPrediction">
+      <End Role="User" EntitySet="User" />
+      <End Role="Prediction" EntitySet="Prediction" />
+    </AssociationSet>
+    <AssociationSet Name="RacePrediction" Association="PeakF1.Store.RacePrediction">
+      <End Role="Race" EntitySet="Race" />
+      <End Role="Prediction" EntitySet="Prediction" />
+    </AssociationSet>
+    <AssociationSet Name="PredictionDetailDriver" Association="PeakF1.Store.PredictionDetailDriver">
+      <End Role="PredictionDetail" EntitySet="PredictionDetail" />
+      <End Role="Driver" EntitySet="Driver" />
+    </AssociationSet>
+    <AssociationSet Name="SeasonRace" Association="PeakF1.Store.SeasonRace">
+      <End Role="Season" EntitySet="Season" />
+      <End Role="Race" EntitySet="Race" />
+    </AssociationSet>
+    <AssociationSet Name="TeamDriver" Association="PeakF1.Store.TeamDriver">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Driver" EntitySet="Driver" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonTeam_Season" Association="PeakF1.Store.FK_SeasonTeam_Season">
+      <End Role="Season" EntitySet="Season" />
+      <End Role="SeasonTeam" EntitySet="SeasonTeam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonTeam_Team" Association="PeakF1.Store.FK_SeasonTeam_Team">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="SeasonTeam" EntitySet="SeasonTeam" />
+    </AssociationSet>
+    <AssociationSet Name="RaceRaceResult" Association="PeakF1.Store.RaceRaceResult">
+      <End Role="Race" EntitySet="Race" />
+      <End Role="RaceResult" EntitySet="RaceResult" />
+    </AssociationSet>
+    <AssociationSet Name="RaceResultDriver" Association="PeakF1.Store.RaceResultDriver">
+      <End Role="RaceResult" EntitySet="RaceResult" />
+      <End Role="Driver" EntitySet="Driver" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Prediction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="RaceId" Type="int" Nullable="false" />
+    <Property Name="TotalScore" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PredictionDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PredictionId" Type="int" Nullable="false" />
+    <Property Name="DriverId" Type="int" Nullable="false" />
+    <Property Name="Position" Type="int" Nullable="false" />
+    <Property Name="Score" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TwitterHandle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Race">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SeasonId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Driver">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeamId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RaceResult">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Position" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Points" Type="int" Nullable="false" />
+    <Property Name="RaceId" Type="int" Nullable="false" />
+    <Property Name="DriverId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Season">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SeasonTeam">
+    <Key>
+      <PropertyRef Name="Seasons_Id" />
+      <PropertyRef Name="Teams_Id" />
+    </Key>
+    <Property Name="Seasons_Id" Type="int" Nullable="false" />
+    <Property Name="Teams_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="PredictionPredictionDetail">
+    <End Role="Prediction" Type="PeakF1.Store.Prediction" Multiplicity="1" />
+    <End Role="PredictionDetail" Type="PeakF1.Store.PredictionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prediction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PredictionDetail">
+        <PropertyRef Name="PredictionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserPrediction">
+    <End Role="User" Type="PeakF1.Store.User" Multiplicity="1" />
+    <End Role="Prediction" Type="PeakF1.Store.Prediction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prediction">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RacePrediction">
+    <End Role="Race" Type="PeakF1.Store.Race" Multiplicity="1" />
+    <End Role="Prediction" Type="PeakF1.Store.Prediction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Race">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prediction">
+        <PropertyRef Name="RaceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PredictionDetailDriver">
+    <End Role="PredictionDetail" Type="PeakF1.Store.PredictionDetail" Multiplicity="*" />
+    <End Role="Driver" Type="PeakF1.Store.Driver" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PredictionDetail">
+        <PropertyRef Name="DriverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SeasonRace">
+    <End Role="Season" Type="PeakF1.Store.Season" Multiplicity="1" />
+    <End Role="Race" Type="PeakF1.Store.Race" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Season">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Race">
+        <PropertyRef Name="SeasonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TeamDriver">
+    <End Role="Team" Type="PeakF1.Store.Team" Multiplicity="1" />
+    <End Role="Driver" Type="PeakF1.Store.Driver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Driver">
+        <PropertyRef Name="TeamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RaceRaceResult">
+    <End Role="Race" Type="PeakF1.Store.Race" Multiplicity="1" />
+    <End Role="RaceResult" Type="PeakF1.Store.RaceResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Race">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RaceResult">
+        <PropertyRef Name="RaceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RaceResultDriver">
+    <End Role="RaceResult" Type="PeakF1.Store.RaceResult" Multiplicity="*" />
+    <End Role="Driver" Type="PeakF1.Store.Driver" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RaceResult">
+        <PropertyRef Name="DriverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonTeam_Season">
+    <End Role="Season" Type="PeakF1.Store.Season" Multiplicity="1" />
+    <End Role="SeasonTeam" Type="PeakF1.Store.SeasonTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Season">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SeasonTeam">
+        <PropertyRef Name="Seasons_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonTeam_Team">
+    <End Role="SeasonTeam" Type="PeakF1.Store.SeasonTeam" Multiplicity="*" />
+    <End Role="Team" Type="PeakF1.Store.Team" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SeasonTeam">
+        <PropertyRef Name="Teams_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="PeakF1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="PeakF1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Prediction" EntityType="PeakF1.Prediction" />
+          <EntitySet Name="PredictionDetail" EntityType="PeakF1.PredictionDetail" />
+          <AssociationSet Name="PredictionPredictionDetail" Association="PeakF1.PredictionPredictionDetail">
+            <End Role="Prediction" EntitySet="Prediction" />
+            <End Role="PredictionDetail" EntitySet="PredictionDetail" />
+          </AssociationSet>
+          <EntitySet Name="User" EntityType="PeakF1.User" />
+          <AssociationSet Name="UserPrediction" Association="PeakF1.UserPrediction">
+            <End Role="User" EntitySet="User" />
+            <End Role="Prediction" EntitySet="Prediction" />
+          </AssociationSet>
+          <EntitySet Name="Race" EntityType="PeakF1.Race" />
+          <AssociationSet Name="RacePrediction" Association="PeakF1.RacePrediction">
+            <End Role="Race" EntitySet="Race" />
+            <End Role="Prediction" EntitySet="Prediction" />
+          </AssociationSet>
+          <EntitySet Name="Driver" EntityType="PeakF1.Driver" />
+          <AssociationSet Name="PredictionDetailDriver" Association="PeakF1.PredictionDetailDriver">
+            <End Role="PredictionDetail" EntitySet="PredictionDetail" />
+            <End Role="Driver" EntitySet="Driver" />
+          </AssociationSet>
+          <EntitySet Name="RaceResult" EntityType="PeakF1.RaceResult" />
+          <EntitySet Name="Season" EntityType="PeakF1.Season" />
+          <AssociationSet Name="SeasonRace" Association="PeakF1.SeasonRace">
+            <End Role="Season" EntitySet="Season" />
+            <End Role="Race" EntitySet="Race" />
+          </AssociationSet>
+          <EntitySet Name="Team" EntityType="PeakF1.Team" />
+          <AssociationSet Name="TeamDriver" Association="PeakF1.TeamDriver">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Driver" EntitySet="Driver" />
+          </AssociationSet>
+          <AssociationSet Name="SeasonTeam" Association="PeakF1.SeasonTeam">
+            <End Role="Season" EntitySet="Season" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="RaceRaceResult" Association="PeakF1.RaceRaceResult">
+            <End Role="Race" EntitySet="Race" />
+            <End Role="RaceResult" EntitySet="RaceResult" />
+          </AssociationSet>
+          <AssociationSet Name="RaceResultDriver" Association="PeakF1.RaceResultDriver">
+            <End Role="RaceResult" EntitySet="RaceResult" />
+            <End Role="Driver" EntitySet="Driver" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Prediction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="PredictionDetails" Relationship="PeakF1.PredictionPredictionDetail" FromRole="Prediction" ToRole="PredictionDetail" />
+          <NavigationProperty Name="User" Relationship="PeakF1.UserPrediction" FromRole="Prediction" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Race" Relationship="PeakF1.RacePrediction" FromRole="Prediction" ToRole="Race" />
+          <Property Name="RaceId" Type="Int32" Nullable="false" />
+          <Property Name="TotalScore" Type="Decimal" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PredictionDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Prediction" Relationship="PeakF1.PredictionPredictionDetail" FromRole="PredictionDetail" ToRole="Prediction" />
+          <Property Name="PredictionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Driver" Relationship="PeakF1.PredictionDetailDriver" FromRole="PredictionDetail" ToRole="Driver" />
+          <Property Name="DriverId" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="Score" Type="Decimal" Nullable="false" />
+        </EntityType>
+        <Association Name="PredictionPredictionDetail">
+          <End Type="PeakF1.Prediction" Role="Prediction" Multiplicity="1" />
+          <End Type="PeakF1.PredictionDetail" Role="PredictionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prediction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PredictionDetail">
+              <PropertyRef Name="PredictionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Predictions" Relationship="PeakF1.UserPrediction" FromRole="User" ToRole="Prediction" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="TwitterHandle" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="UserPrediction">
+          <End Type="PeakF1.User" Role="User" Multiplicity="1" />
+          <End Type="PeakF1.Prediction" Role="Prediction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prediction">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Predictions" Relationship="PeakF1.RacePrediction" FromRole="Race" ToRole="Prediction" />
+          <NavigationProperty Name="Season" Relationship="PeakF1.SeasonRace" FromRole="Race" ToRole="Season" />
+          <Property Name="SeasonId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Location" Type="String" Nullable="false" />
+          <NavigationProperty Name="RaceResults" Relationship="PeakF1.RaceRaceResult" FromRole="Race" ToRole="RaceResult" />
+        </EntityType>
+        <Association Name="RacePrediction">
+          <End Type="PeakF1.Race" Role="Race" Multiplicity="1" />
+          <End Type="PeakF1.Prediction" Role="Prediction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prediction">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Team" Relationship="PeakF1.TeamDriver" FromRole="Driver" ToRole="Team" />
+          <Property Name="TeamId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RaceResults" Relationship="PeakF1.RaceResultDriver" FromRole="Driver" ToRole="RaceResult" />
+        </EntityType>
+        <Association Name="PredictionDetailDriver">
+          <End Type="PeakF1.PredictionDetail" Role="PredictionDetail" Multiplicity="*" />
+          <End Type="PeakF1.Driver" Role="Driver" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PredictionDetail">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RaceResult">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Position" Type="String" Nullable="false" />
+          <Property Name="Points" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Race" Relationship="PeakF1.RaceRaceResult" FromRole="RaceResult" ToRole="Race" />
+          <Property Name="RaceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Driver" Relationship="PeakF1.RaceResultDriver" FromRole="RaceResult" ToRole="Driver" />
+          <Property Name="DriverId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Races" Relationship="PeakF1.SeasonRace" FromRole="Season" ToRole="Race" />
+          <NavigationProperty Name="Teams" Relationship="PeakF1.SeasonTeam" FromRole="Season" ToRole="Team" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="SeasonRace">
+          <End Type="PeakF1.Season" Role="Season" Multiplicity="1" />
+          <End Type="PeakF1.Race" Role="Race" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Race">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Drivers" Relationship="PeakF1.TeamDriver" FromRole="Team" ToRole="Driver" />
+          <NavigationProperty Name="Seasons" Relationship="PeakF1.SeasonTeam" FromRole="Team" ToRole="Season" />
+        </EntityType>
+        <Association Name="TeamDriver">
+          <End Type="PeakF1.Team" Role="Team" Multiplicity="1" />
+          <End Type="PeakF1.Driver" Role="Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Driver">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SeasonTeam">
+          <End Type="PeakF1.Season" Role="Season" Multiplicity="*" />
+          <End Type="PeakF1.Team" Role="Team" Multiplicity="*" />
+        </Association>
+        <Association Name="RaceRaceResult">
+          <End Type="PeakF1.Race" Role="Race" Multiplicity="1" />
+          <End Type="PeakF1.RaceResult" Role="RaceResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RaceResult">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RaceResultDriver">
+          <End Type="PeakF1.RaceResult" Role="RaceResult" Multiplicity="*" />
+          <End Type="PeakF1.Driver" Role="Driver" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RaceResult">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PeakF1StoreContainer" CdmEntityContainer="PeakF1Container">
+    <EntitySetMapping Name="Prediction">
+      <EntityTypeMapping TypeName="IsTypeOf(PeakF1.Prediction)">
+        <MappingFragment StoreEntitySet="Prediction">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RaceId" ColumnName="RaceId" />
+          <ScalarProperty Name="TotalScore" ColumnName="TotalScore" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PredictionDetail">
+      <EntityTypeMapping TypeName="IsTypeOf(PeakF1.PredictionDetail)">
+        <MappingFragment StoreEntitySet="PredictionDetail">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PredictionId" ColumnName="PredictionId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="IsTypeOf(PeakF1.User)">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="TwitterHandle" ColumnName="TwitterHandle" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Race">
+      <EntityTypeMapping TypeName="IsTypeOf(PeakF1.Race)">
+        <MappingFragment StoreEntitySet="Race">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Driver">
+      <EntityTypeMapping TypeName="IsTypeOf(PeakF1.Driver)">
+        <MappingFragment StoreEntitySet="Driver">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RaceResult">
+      <EntityTypeMapping TypeName="IsTypeOf(PeakF1.RaceResult)">
+        <MappingFragment StoreEntitySet="RaceResult">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="RaceId" ColumnName="RaceId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Season">
+      <EntityTypeMapping TypeName="IsTypeOf(PeakF1.Season)">
+        <MappingFragment StoreEntitySet="Season">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Team">
+      <EntityTypeMapping TypeName="IsTypeOf(PeakF1.Team)">
+        <MappingFragment StoreEntitySet="Team">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SeasonTeam" TypeName="PeakF1.SeasonTeam" StoreEntitySet="SeasonTeam">
+      <EndProperty Name="Season">
+        <ScalarProperty Name="Id" ColumnName="Seasons_Id" />
+      </EndProperty>
+      <EndProperty Name="Team">
+        <ScalarProperty Name="Id" ColumnName="Teams_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

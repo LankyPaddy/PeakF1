@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6D4A0F
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeakF1.Data", "PeakF1.Data\PeakF1.Data.csproj", "{1710D31A-CCCC-41E5-918C-C40E6A8B445B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{FE11E4AC-944E-4FB1-91D7-26A6ADA7C89D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE11E4AC-944E-4FB1-91D7-26A6ADA7C89D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE11E4AC-944E-4FB1-91D7-26A6ADA7C89D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1710D31A-CCCC-41E5-918C-C40E6A8B445B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1710D31A-CCCC-41E5-918C-C40E6A8B445B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1710D31A-CCCC-41E5-918C-C40E6A8B445B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1710D31A-CCCC-41E5-918C-C40E6A8B445B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

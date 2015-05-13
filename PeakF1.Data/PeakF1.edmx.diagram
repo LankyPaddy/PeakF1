@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4250e93705f641e1a6829921be106ee6" Name="Diagram1" >
+        <EntityTypeShape EntityType="PeakF1.Prediction" Width="1.875" PointX="2.625" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PeakF1.PredictionDetail" Width="1.5" PointX="5.375" PointY="1.25" />
+        <AssociationConnector Association="PeakF1.PredictionPredictionDetail" />
+        <EntityTypeShape EntityType="PeakF1.User" Width="1.5" PointX="0.5" PointY="0.5" />
+        <AssociationConnector Association="PeakF1.UserPrediction" />
+        <EntityTypeShape EntityType="PeakF1.Race" Width="1.5" PointX="1.75" PointY="4.25" />
+        <AssociationConnector Association="PeakF1.RacePrediction" />
+        <EntityTypeShape EntityType="PeakF1.Driver" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="PeakF1.PredictionDetailDriver" />
+        <EntityTypeShape EntityType="PeakF1.RaceResult" Width="2.5" PointX="5.125" PointY="4.375" />
+        <EntityTypeShape EntityType="PeakF1.Season" Width="1.5" PointX="1.5" PointY="7.5" />
+        <AssociationConnector Association="PeakF1.SeasonRace" />
+        <EntityTypeShape EntityType="PeakF1.Team" Width="1.5" PointX="8.5" PointY="6.75" />
+        <AssociationConnector Association="PeakF1.TeamDriver" />
+        <AssociationConnector Association="PeakF1.SeasonTeam" />
+        <AssociationConnector Association="PeakF1.RaceRaceResult" />
+        <AssociationConnector Association="PeakF1.RaceResultDriver" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
